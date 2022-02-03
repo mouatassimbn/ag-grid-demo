@@ -95,6 +95,18 @@ export enum FilterType {
   Date = "agDateColumnFilter",
 }
 
+export enum CellType {
+  Text = "TextInput",
+  Date = "DateInput",
+  Day = "DayInput",
+  Time = "TimeInput",
+  Number = "NumberInput",
+  Toggle = "ToggleInput",
+  Color = "ColorInput",
+  Checkbox = "CheckboxInput",
+  Select = "SelectInput",
+}
+
 //TODO: Need to implement a custom number component. should limit filter number feild to accept only number key strokes
 // TODO: Minimum requirements :
 // - Can sort table
@@ -105,3 +117,12 @@ export enum FilterType {
 // - Table have a column for actions
 // - Each column needs specific actions
 // - Each column need validaiton
+// -- Needed Cells
+// --- Date
+// --- Text
+// --- Number
+// --- Toggle
+// --- Color
+// --- Checkbox
+// --- Select
+// ----

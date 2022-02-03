@@ -38,7 +38,7 @@ const data = [
     model: "Celica",
     price: 35000,
     date: new Date(Date.now()),
-    actions: { canSave: true },
+    actions: { canSave: false },
   },
   {
     make: "Ford",
@@ -52,7 +52,7 @@ const data = [
     model: "Boxter",
     price: 72000,
     date: new Date(Date.now()),
-    actions: { canEdit: true },
+    actions: { canEdit: false },
   },
 ];
 
