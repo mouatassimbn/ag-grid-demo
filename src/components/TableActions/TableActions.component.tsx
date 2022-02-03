@@ -1,4 +1,5 @@
 import { ICellRendererParams } from "ag-grid-community";
+import { useEffect, useState } from "react";
 import TableCanInteractAction from "../TableCanInteractAction/TableCanInteractAction.component";
 import TableEditingAction from "../TableEditingAction/TableEditingAction.component";
 
@@ -23,20 +24,25 @@ const defaults = {
 };
 
 const TableActions = (props: TableActionsProps) => {
-  const { data, onEdit, onSave, onCancel, onDelete } = props;
+  const { data, onEdit, onSave, onCancel, onDelete, api } = props;
   const mergedWithDefaults: Actions = { ...defaults, ...data.actions };
   const { canSave, canEdit, canDelete } = mergedWithDefaults;
+  const [isEditing, setIsEditing] = useState(false);
 
-  const isCurrentRowEditing = props.api
-    .getEditingCells()
-    .some((cell: any) => cell.rowIndex === props.node.rowIndex);
+  useEffect(() => {
+    setIsEditing(
+      api
+        .getEditingCells()
+        .some((cell: any) => cell.rowIndex === props.node.rowIndex)
+    );
+  });
 
   const saveHandler = (): void => onSave(props);
   const cancelHandler = (): void => onCancel(props);
   const deleteHandler = (): void => onDelete(props);
   const editHandler = (): void => onEdit(props);
 
-  if (isCurrentRowEditing) {
+  if (isEditing) {
     return (
       <TableEditingAction
         canSave={canSave}

@@ -3,6 +3,7 @@ import Table, {
   ColumnDefinition,
   FilterType,
 } from "./components/Table/Table.component";
+import WithActions from "./components/WithActions/WithActions.component";
 
 const columnDefinitions: ColumnDefinition[] = [
   {
@@ -55,10 +56,16 @@ const data = [
   },
 ];
 
+const TableWithActions = WithActions(Table);
+
 function App() {
   return (
     <div className="App">
-      <Table data={data} columnsDefinition={columnDefinitions}></Table>
+      <TableWithActions
+        data={data}
+        columns={columnDefinitions}
+        onEdit={(params:any)=> console.log(params)}
+      />
     </div>
   );
 }

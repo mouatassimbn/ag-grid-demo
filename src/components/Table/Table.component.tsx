@@ -1,94 +1,70 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useMemo, useRef, useState } from "react";
 import { AgGridReact } from "ag-grid-react";
 
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-material.css";
-import { PaginationNumberFormatterParams } from "ag-grid-community";
+import {
+  PaginationNumberFormatterParams,
+  GridOptions,
+  ColDef,
+  RowEditingStartedEvent,
+} from "ag-grid-community";
 
 import TableActions from "../TableActions/TableActions.component";
+import { ActionsColumnDefinition } from "../WithActions/WithActions.component";
 
 interface TableProps {
-  options?: any;
+  options?: Options;
   data: any[];
   columnsDefinition: ColumnDefinition[];
+  actions?: {
+    definition: ActionsColumnDefinition;
+    onEditHandler: Function;
+    onSaveHandler: Function;
+    onDeleteHandler: Function;
+    onCancelHandler: Function;
+  };
 }
-
-const defaultOptions = {
-  defaultColDef: {
-    flex: 1,
-    minWidth: 200,
-    resizable: true,
-    floatingFilter: true,
-    editable: true,
-  },
-  pagination: true,
-  paginationPageSize: 4,
-  frameworkComponents: {
-    TableActions: TableActions,
-  },
-  editType: "fullRow",
-  suppressClickEdit: true,
-};
 
 const Table = (props: TableProps) => {
   const { options, data, columnsDefinition } = props;
   const grifRef = useRef(null);
-  const [tableOptions, setTableOptions] = useState(defaultOptions);
-  const [columnDefs, setColumnDefs] = useState<any[]>(columnsDefinition);
+  const [rowData] = useState(data);
 
-  useEffect(() => {
-    setTableOptions({ ...tableOptions, ...options });
-  }, [props]);
-
-  useEffect(() => {
-    const actions = {
-      colId: "actions",
-      cellRenderer: "TableActions",
-      editable: false,
-      cellRendererParams: {
-        onEdit: editHandler,
-        onSave: saveHandler,
-        onDelete: deleteHandler,
-        onCancel: cancelHandler,
+  const tableOptions: Options = useMemo(
+    () => ({
+      defaultColDef: {
+        flex: 1,
+        minWidth: 200,
+        resizable: true,
+        floatingFilter: true,
+        editable: true,
       },
-    };
+      frameworkComponents: {
+        TableActions: TableActions,
+      },
+      pagination: true,
+      paginationPageSize: 4,
+      editType: "fullRow",
+      suppressClickEdit: true,
+      ...options,
+    }),
+    [options]
+  );
 
-    setColumnDefs([...columnDefs, actions]);
+  const onRowEditingToggled = useCallback((params: RowEditingStartedEvent) => {
+    params.api.refreshCells();
   }, []);
 
-  const editHandler = (params: any) => {
-    console.log("edit");
-    params.api.startEditingCell({
-      rowIndex: params.node.rowIndex,
-      colKey: params.columnApi.getDisplayedCenterColumns()[0].colId,
-    });
-  };
-
-  const saveHandler = (params: any) => {
-    params.api.stopEditing(false);
-  };
-
-  const deleteHandler = (params: any) => {
-    console.log("deleted");
-  };
-
-  const cancelHandler = (params: any) => {
-    params.api.stopEditing(true);
-  };
-
-  const onRowEditingToggled = (params: any) => {
-    params.api.refreshCells();
-  };
-
   return (
-    <div id="myGrid" className="ag-theme-material" style={{ height: 400 }}>
+    <div id="myGrid" className="ag-theme-material" style={{ height: 500 }}>
       <AgGridReact
         ref={grifRef}
-        rowData={data}
         gridOptions={tableOptions}
         onRowEditingStarted={onRowEditingToggled}
         onRowEditingStopped={onRowEditingToggled}
-        columnDefs={columnDefs}
+        columnDefs={columnsDefinition}
+        rowData={rowData}
       />
     </div>
   );
@@ -96,15 +72,15 @@ const Table = (props: TableProps) => {
 
 export default Table;
 
-export interface ColumnDefinition {
-  headerName: string;
-  field: string;
+export interface ColumnDefinition extends ColDef {
+  headerName?: string;
+  field?: string;
   sortable?: true;
   checkboxSelection?: boolean;
   filter?: boolean | FilterType;
 }
 
-export interface Options {
+export interface Options extends GridOptions {
   pagination: boolean;
   paginationPageSize?: number;
   paginationAutoPageSize?: boolean;
