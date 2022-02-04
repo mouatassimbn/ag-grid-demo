@@ -40,7 +40,7 @@ const TextInput = forwardRef((props: any, ref) => {
       onChange={(event) => setValue(event.target.value)}
       variant="standard"
       size="small"
-      style={{ width: "100%", height: "100%" }}
+      fullWidth 
     />
   );
 });
