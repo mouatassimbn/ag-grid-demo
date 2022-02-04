@@ -11,6 +11,7 @@ const columnDefinitions: ColumnDefinition[] = [
     field: "make",
     sortable: true,
     filter: true,
+    cellEditor: "textInput",
   },
   {
     headerName: "Model",
@@ -64,7 +65,7 @@ function App() {
       <TableWithActions
         data={data}
         columns={columnDefinitions}
-        onEdit={(params:any)=> console.log(params)}
+        onEdit={(params: any) => console.log(params)}
       />
     </div>
   );

@@ -11,7 +11,10 @@ import {
 } from "ag-grid-community";
 
 import TableActions from "../TableActions/TableActions.component";
+import TextInput from "../TextInput/TextInput.component";
 import { ActionsColumnDefinition } from "../WithActions/WithActions.component";
+
+import "Table.styles.css";
 
 interface TableProps {
   options?: Options;
@@ -41,7 +44,8 @@ const Table = (props: TableProps) => {
         editable: true,
       },
       frameworkComponents: {
-        TableActions: TableActions,
+        tableActions: TableActions,
+        textInput: TextInput,
       },
       pagination: true,
       paginationPageSize: 4,
