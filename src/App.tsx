@@ -7,16 +7,14 @@ import WithActions from "./components/WithActions/WithActions.component";
 
 const columnDefinitions: ColumnDefinition[] = [
   {
-    headerName: "Toggle",
+    headerName: "Active",
+    field: "active",
     type: CellType.Toggle,
   },
   {
-    headerName: "Is active",
+    headerName: "read",
+    field:"read",
     type: CellType.Checkbox,
-  },
-  {
-    headerName: "Number",
-    type: CellType.Number,
   },
   {
     headerName: "Select",
@@ -51,6 +49,8 @@ const columnDefinitions: ColumnDefinition[] = [
 
 const data = [
   {
+    active: true,
+    read: true,
     make: "Toyota",
     model: "Celica",
     select: "test 1",
@@ -59,6 +59,8 @@ const data = [
     actions: { canSave: false },
   },
   {
+    active: false,
+    read: true,
     make: "Ford",
     model: "Mondeo",
     select: "test 1",
@@ -67,6 +69,8 @@ const data = [
     actions: { canDelete: true },
   },
   {
+    active: false,
+    read: false,
     make: "Porshe",
     model: "Boxter",
     select: "test 1",
