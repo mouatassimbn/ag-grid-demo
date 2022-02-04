@@ -15,6 +15,14 @@ const columnDefinitions: ColumnDefinition[] = [
     cellEditor: "checkboxInput",
   },
   {
+    headerName: "Date",
+    // field: "make",
+    // sortable: true,
+    // filter: true,/
+    cellRenderer: "dateInput",
+    cellEditor: "dateInput",
+  },
+  {
     headerName: "Make",
     field: "make",
     sortable: true,

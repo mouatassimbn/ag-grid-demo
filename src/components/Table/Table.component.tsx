@@ -16,6 +16,7 @@ import CheckboxInput from "../CheckboxInput/CheckboxInput.component";
 import { ActionsColumnDefinition } from "../WithActions/WithActions.component";
 
 import "./Table.styles.css";
+import DateInput from "../DateInput/DateInput.component";
 
 interface TableProps {
   options?: Options;
@@ -48,6 +49,7 @@ const Table = (props: TableProps) => {
         tableActions: TableActions,
         textInput: TextInput,
         checkboxInput: CheckboxInput,
+        dateInput: DateInput,
       },
       pagination: true,
       paginationPageSize: 4,
