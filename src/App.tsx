@@ -5,6 +5,12 @@ import Table, {
 } from "./components/Table/Table.component";
 import WithActions from "./components/WithActions/WithActions.component";
 
+const values = [
+  { value: "test1", label: "Test 1" },
+  { value: "test2", label: "Test 2" },
+  { value: "test3", label: "Test 3" },
+];
+
 const columnDefinitions: ColumnDefinition[] = [
   {
     headerName: "Active",
@@ -13,12 +19,15 @@ const columnDefinitions: ColumnDefinition[] = [
   },
   {
     headerName: "read",
-    field:"read",
+    field: "read",
     type: CellType.Checkbox,
   },
   {
     headerName: "Select",
     field: "select",
+    options: {
+      options: values,
+    },
     type: CellType.Select,
   },
   {
@@ -53,7 +62,7 @@ const data = [
     read: true,
     make: "Toyota",
     model: "Celica",
-    select: "test 1",
+    select: "test1",
     price: 35000,
     date: "2022-01-05",
     actions: { canSave: false },
@@ -63,7 +72,7 @@ const data = [
     read: true,
     make: "Ford",
     model: "Mondeo",
-    select: "test 2",
+    select: "test2",
     price: 32000,
     date: "2022-01-05",
     actions: { canDelete: true },
@@ -73,7 +82,7 @@ const data = [
     read: false,
     make: "Porshe",
     model: "Boxter",
-    select: "test 3",
+    select: "test3",
     price: 72000,
     date: "2022-01-05",
     actions: { canEdit: false },
@@ -88,7 +97,6 @@ function App() {
       <TableWithActions
         data={data}
         columns={columnDefinitions}
-        onEdit={(params: any) => console.log(params)}
       />
     </div>
   );

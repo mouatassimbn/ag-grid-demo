@@ -97,6 +97,7 @@ export interface ColumnDefinition extends ColDef {
   field?: string;
   sortable?: true;
   type?: CellType;
+  options?: any;
 }
 export interface Options extends GridOptions {
   pagination: boolean;
@@ -123,9 +124,10 @@ export enum CellType {
 // Converts columns params
 //TODO:Might need to create an adapter component to take care of conversion
 const conversionAdapter = (columns: ColumnDefinition[]) => {
-  return columns.map(({ type, ...others }: ColumnDefinition) => ({
+  return columns.map(({ type, options, ...others }: ColumnDefinition) => ({
     cellRenderer: type,
     cellEditor: type,
+    cellRendererParams: options,
     ...others,
   }));
 };

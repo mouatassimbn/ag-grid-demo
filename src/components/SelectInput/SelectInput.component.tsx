@@ -8,12 +8,6 @@ import {
   useState,
 } from "react";
 
-const values = [
-  { value: "test 1", label: "test1" },
-  { value: "test 2", label: "test2" },
-  { value: "test 3", label: "test3" },
-];
-
 const SelectInput = forwardRef((props: any, ref) => {
   const [value, setValue] = useState(props.value);
   const inputRef: Ref<any> = useRef(null);
@@ -55,11 +49,13 @@ const SelectInput = forwardRef((props: any, ref) => {
       size="small"
       fullWidth
     >
-      {values.map((option) => (
-        <MenuItem key={option.value} value={option.value}>
-          {option.label}
-        </MenuItem>
-      ))}
+      {props.colDef.cellRendererParams.options.map(
+        (option: { value: any; label: string }) => (
+          <MenuItem key={option.value} value={option.value}>
+            {option.label}
+          </MenuItem>
+        )
+      )}
     </TextField>
   );
 });
