@@ -14,7 +14,7 @@ import TableActions from "../TableActions/TableActions.component";
 import TextInput from "../TextInput/TextInput.component";
 import { ActionsColumnDefinition } from "../WithActions/WithActions.component";
 
-import "Table.styles.css";
+import "./Table.styles.css";
 
 interface TableProps {
   options?: Options;
