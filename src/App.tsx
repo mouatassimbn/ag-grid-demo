@@ -7,6 +7,14 @@ import WithActions from "./components/WithActions/WithActions.component";
 
 const columnDefinitions: ColumnDefinition[] = [
   {
+    headerName: "Toggle",
+    // field: "make",
+    // sortable: true,
+    // filter: true,/
+    cellRenderer: "toggleInput",
+    cellEditor: "toggleInput",
+  },
+  {
     headerName: "Is active",
     // field: "make",
     // sortable: true,
