@@ -19,6 +19,7 @@ import "./Table.styles.css";
 import DateInput from "../DateInput/DateInput.component";
 import ToggleInput from "../ToggleInput/ToggleInput.component";
 import SelectInput from "../SelectInput/SelectInput.component";
+import NumberInput from "../NumberInput/NumberInput.component";
 
 interface TableProps {
   options?: Options;
@@ -48,12 +49,13 @@ const Table = (props: TableProps) => {
         editable: true,
       },
       frameworkComponents: {
-        tableActions: TableActions,
-        textInput: TextInput,
-        checkboxInput: CheckboxInput,
-        dateInput: DateInput,
-        toggleInput: ToggleInput,
-        selectInput: SelectInput,
+        actions: TableActions,
+        text: TextInput,
+        checkbox: CheckboxInput,
+        date: DateInput,
+        toggle: ToggleInput,
+        select: SelectInput,
+        number: NumberInput,
       },
       pagination: true,
       paginationPageSize: 4,

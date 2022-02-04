@@ -8,42 +8,35 @@ import WithActions from "./components/WithActions/WithActions.component";
 const columnDefinitions: ColumnDefinition[] = [
   {
     headerName: "Toggle",
-    // field: "make",
-    // sortable: true,
-    // filter: true,/
-    cellRenderer: "toggleInput",
-    cellEditor: "toggleInput",
+    cellRenderer: "toggle",
+    cellEditor: "toggle",
   },
   {
     headerName: "Is active",
-    // field: "make",
-    // sortable: true,
-    // filter: true,/
-    cellRenderer: "checkboxInput",
-    cellEditor: "checkboxInput",
+    cellRenderer: "checkbox",
+    cellEditor: "checkbox",
+  },
+  {
+    headerName: "Number",
+    cellRenderer: "number",
+    cellEditor: "number",
   },
   {
     headerName: "Date",
-    // field: "make",
-    // sortable: true,
-    // filter: true,/
-    cellRenderer: "dateInput",
-    cellEditor: "dateInput",
+    cellRenderer: "date",
+    cellEditor: "date",
   },
   {
     headerName: "Selecy",
-    // field: "make",
-    // sortable: true,
-    // filter: true,/
-    cellRenderer: "selectInput",
-    cellEditor: "selectInput",
+    cellRenderer: "select",
+    cellEditor: "select",
   },
   {
     headerName: "Make",
     field: "make",
     sortable: true,
     filter: true,
-    cellEditor: "textInput",
+    cellEditor: "text",
   },
   {
     headerName: "Model",

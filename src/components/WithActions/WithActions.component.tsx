@@ -42,7 +42,7 @@ const WithActions = (Table: any) => {
           {
             colId: "actions",
             editable: false,
-            cellRenderer: "tableActions",
+            cellRenderer: "actions",
             cellRendererParams: {
               onEdit: this._editHandler,
               onSave: this._saveHandler,
