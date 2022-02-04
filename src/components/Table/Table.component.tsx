@@ -71,16 +71,8 @@ const Table = (props: TableProps) => {
   }, []);
 
   const onGridReady = () => {
-    //TODO: Clean this convertion
-    const converted = columnsDefinition.map(
-      ({ type, ...others }: ColumnDefinition) => ({
-        cellRenderer: type!.toString(),
-        cellEditor: type !== CellType.Actions ? type?.toString() : null,
-        ...others,
-      })
-    );
-
-    setColDefs(converted);
+    // Step 1 convert
+    setColDefs(conversionAdapter(columnsDefinition));
   };
 
   return (
@@ -128,6 +120,16 @@ export enum CellType {
   Actions = "actions",
 }
 
+// Converts columns params
+//TODO:Might need to create an adapter component to take care of conversion
+const conversionAdapter = (columns: ColumnDefinition[]) => {
+  return columns.map(({ type, ...others }: ColumnDefinition) => ({
+    cellRenderer: type,
+    cellEditor: type,
+    ...others,
+  }));
+};
+
 //TODO: Need to implement a custom number component. should limit filter number feild to accept only number key strokes
 // TODO: Minimum requirements :
 // - Can sort table
@@ -141,9 +143,9 @@ export enum CellType {
 // -- Needed Cells
 // --- Date [X]
 // --- Text [X]
-// --- Number
+// --- Number [X]
 // --- Toggle [X]
-// --- Color
+// --- Color for later
 // --- Checkbox [X]
 // --- Select [X]
 // ----
