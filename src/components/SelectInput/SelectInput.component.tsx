@@ -1,5 +1,5 @@
 import { MenuItem, TextField } from "@mui/material";
-import { forwardRef, useImperativeHandle, useRef, useState } from "react";
+import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from "react";
 
 const values = [
   { value: "test 1", label: "test1" },
@@ -10,6 +10,16 @@ const values = [
 const SelectInput = forwardRef((props: any, ref) => {
   const [value, setValue] = useState(props.value);
   const inputRef = useRef(null);
+
+  const [isEditing, setIsEditing] = useState(false);
+
+  useEffect(() => {
+    setIsEditing(
+      props.api
+        .getEditingCells()
+        .some((cell: any) => cell.rowIndex === props.node.rowIndex)
+    );
+  });
 
   useImperativeHandle(ref, () => ({
     getValue() {
@@ -30,6 +40,7 @@ const SelectInput = forwardRef((props: any, ref) => {
       ref={inputRef}
       select
       value={value}
+      disabled={!isEditing}
       onChange={(event) => setValue(event.target.value)}
       variant="standard"
       size="small"

@@ -16,6 +16,16 @@ const TextInput = forwardRef((props: any, ref) => {
     setTimeout(() => refInput.current.focus());
   }, []);
 
+  const [isEditing, setIsEditing] = useState(false);
+
+  useEffect(() => {
+    setIsEditing(
+      props.api
+        .getEditingCells()
+        .some((cell: any) => cell.rowIndex === props.node.rowIndex)
+    );
+  });
+
   useImperativeHandle(ref, () => {
     return {
       getValue() {
@@ -38,9 +48,10 @@ const TextInput = forwardRef((props: any, ref) => {
       ref={refInput}
       value={value}
       onChange={(event) => setValue(event.target.value)}
+      disabled={!isEditing}
       variant="standard"
       size="small"
-      fullWidth 
+      fullWidth
     />
   );
 });

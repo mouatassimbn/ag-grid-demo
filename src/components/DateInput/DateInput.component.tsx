@@ -1,10 +1,25 @@
-import { forwardRef, useImperativeHandle, useRef, useState } from "react";
+import {
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from "react";
 import { TextField } from "@mui/material";
 
 const DateInput = forwardRef((props: any, ref) => {
   const [value, setValue] = useState(props.value);
   const inputRef = useRef(null);
 
+  const [isEditing, setIsEditing] = useState(false);
+
+  useEffect(() => {
+    setIsEditing(
+      props.api
+        .getEditingCells()
+        .some((cell: any) => cell.rowIndex === props.node.rowIndex)
+    );
+  });
   useImperativeHandle(ref, () => ({
     getValue() {
       return value;
@@ -22,6 +37,7 @@ const DateInput = forwardRef((props: any, ref) => {
       type="date"
       ref={inputRef}
       value={value}
+      disabled={!isEditing}
       onChange={(event) => setValue(event.target.value)}
       variant="standard"
       size="small"
