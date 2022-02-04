@@ -31,6 +31,14 @@ const columnDefinitions: ColumnDefinition[] = [
     cellEditor: "dateInput",
   },
   {
+    headerName: "Selecy",
+    // field: "make",
+    // sortable: true,
+    // filter: true,/
+    cellRenderer: "selectInput",
+    cellEditor: "selectInput",
+  },
+  {
     headerName: "Make",
     field: "make",
     sortable: true,

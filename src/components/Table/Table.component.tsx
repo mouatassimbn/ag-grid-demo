@@ -18,6 +18,7 @@ import { ActionsColumnDefinition } from "../WithActions/WithActions.component";
 import "./Table.styles.css";
 import DateInput from "../DateInput/DateInput.component";
 import ToggleInput from "../ToggleInput/ToggleInput.component";
+import SelectInput from "../SelectInput/SelectInput.component";
 
 interface TableProps {
   options?: Options;
@@ -52,6 +53,7 @@ const Table = (props: TableProps) => {
         checkboxInput: CheckboxInput,
         dateInput: DateInput,
         toggleInput: ToggleInput,
+        selectInput: SelectInput,
       },
       pagination: true,
       paginationPageSize: 4,
@@ -128,11 +130,12 @@ export enum CellType {
 // - Each column needs specific actions
 // - Each column need validaiton
 // -- Needed Cells
-// --- Date
-// --- Text
+// --- Date [X]
+// --- Text [X]
 // --- Number
-// --- Toggle
+// --- Toggle [X]
 // --- Color
-// --- Checkbox
-// --- Select
+// --- Checkbox [X]
+// --- Select [X]
 // ----
+// Fix read only and editing for each input
