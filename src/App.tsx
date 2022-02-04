@@ -7,6 +7,14 @@ import WithActions from "./components/WithActions/WithActions.component";
 
 const columnDefinitions: ColumnDefinition[] = [
   {
+    headerName: "Is active",
+    // field: "make",
+    // sortable: true,
+    // filter: true,/
+    cellRenderer: "checkboxInput",
+    cellEditor: "checkboxInput",
+  },
+  {
     headerName: "Make",
     field: "make",
     sortable: true,
