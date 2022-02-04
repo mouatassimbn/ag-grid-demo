@@ -36,7 +36,7 @@ const ToggleInput = forwardRef((props: any, ref) => {
   return (
     <Switch
       ref={inputRef}
-      value={value}
+      checked={value}
       disabled={!isEditing}
       onChange={(event) => setValue(event.target.value)}
     />

@@ -38,7 +38,7 @@ const CheckboxInput = forwardRef((props: any, ref) => {
   return (
     <Checkbox
       ref={refInput}
-      value={value}
+      checked={value}
       disabled={!isEditing}
       onChange={(event) => setValue(event.target.value)}
     />
