@@ -1,6 +1,7 @@
 import { TextField } from "@mui/material";
 import {
   forwardRef,
+  Ref,
   useEffect,
   useImperativeHandle,
   useRef,
@@ -9,10 +10,12 @@ import {
 
 const NumberInput = forwardRef((props: any, ref) => {
   const [value, setValue] = useState(props.value);
-  const inputRef = useRef(null);
   const [isEditing, setIsEditing] = useState(false);
+  const inputRef : Ref<any> = useRef(null);
 
   useEffect(() => {
+    setTimeout(() => inputRef.current.focus());
+
     setIsEditing(
       props.api
         .getEditingCells()
