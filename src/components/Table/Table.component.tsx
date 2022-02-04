@@ -38,6 +38,7 @@ const Table = (props: TableProps) => {
   const { options, data, columnsDefinition } = props;
   const grifRef = useRef(null);
   const [rowData] = useState(data);
+  const [colDefs, setColDefs] = useState<any[]>();
 
   const tableOptions: Options = useMemo(
     () => ({
@@ -45,17 +46,16 @@ const Table = (props: TableProps) => {
         flex: 1,
         minWidth: 200,
         resizable: true,
-        floatingFilter: true,
         editable: true,
       },
       frameworkComponents: {
         actions: TableActions,
-        text: TextInput,
-        checkbox: CheckboxInput,
-        date: DateInput,
-        toggle: ToggleInput,
-        select: SelectInput,
-        number: NumberInput,
+        textInput: TextInput,
+        checkboxInput: CheckboxInput,
+        dateInput: DateInput,
+        toggleInput: ToggleInput,
+        selectInput: SelectInput,
+        numberInput: NumberInput,
       },
       pagination: true,
       paginationPageSize: 4,
@@ -70,14 +70,28 @@ const Table = (props: TableProps) => {
     params.api.refreshCells();
   }, []);
 
+  const onGridReady = () => {
+    //TODO: Clean this convertion
+    const converted = columnsDefinition.map(
+      ({ type, ...others }: ColumnDefinition) => ({
+        cellRenderer: type!.toString(),
+        cellEditor: type !== CellType.Actions ? type?.toString() : null,
+        ...others,
+      })
+    );
+
+    setColDefs(converted);
+  };
+
   return (
     <div id="myGrid" className="ag-theme-material" style={{ height: 500 }}>
       <AgGridReact
         ref={grifRef}
         gridOptions={tableOptions}
+        onGridReady={onGridReady}
         onRowEditingStarted={onRowEditingToggled}
         onRowEditingStopped={onRowEditingToggled}
-        columnDefs={columnsDefinition}
+        columnDefs={colDefs}
         rowData={rowData}
       />
     </div>
@@ -90,10 +104,8 @@ export interface ColumnDefinition extends ColDef {
   headerName?: string;
   field?: string;
   sortable?: true;
-  checkboxSelection?: boolean;
-  filter?: boolean | FilterType;
+  type?: CellType;
 }
-
 export interface Options extends GridOptions {
   pagination: boolean;
   paginationPageSize?: number;
@@ -103,22 +115,17 @@ export interface Options extends GridOptions {
   ) => string;
 }
 
-export enum FilterType {
-  Text = "agTextColumnFilter",
-  Number = "agNumberColumnFilter",
-  Date = "agDateColumnFilter",
-}
-
 export enum CellType {
-  Text = "TextInput",
-  Date = "DateInput",
-  Day = "DayInput",
-  Time = "TimeInput",
-  Number = "NumberInput",
-  Toggle = "ToggleInput",
-  Color = "ColorInput",
-  Checkbox = "CheckboxInput",
-  Select = "SelectInput",
+  Text = "textInput",
+  Date = "dateInput",
+  Day = "dayInput",
+  Time = "timeInput",
+  Number = "numberInput",
+  Toggle = "toggleInput",
+  Color = "colorInput",
+  Checkbox = "checkboxInput",
+  Select = "selectInput",
+  Actions = "actions",
 }
 
 //TODO: Need to implement a custom number component. should limit filter number feild to accept only number key strokes

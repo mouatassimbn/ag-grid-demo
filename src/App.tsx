@@ -1,60 +1,51 @@
 import React from "react";
 import Table, {
+  CellType,
   ColumnDefinition,
-  FilterType,
 } from "./components/Table/Table.component";
 import WithActions from "./components/WithActions/WithActions.component";
 
 const columnDefinitions: ColumnDefinition[] = [
   {
     headerName: "Toggle",
-    cellRenderer: "toggle",
-    cellEditor: "toggle",
+    type: CellType.Toggle,
   },
   {
     headerName: "Is active",
-    cellRenderer: "checkbox",
-    cellEditor: "checkbox",
+    type: CellType.Checkbox,
   },
   {
     headerName: "Number",
-    cellRenderer: "number",
-    cellEditor: "number",
+    type: CellType.Number,
   },
   {
-    headerName: "Date",
-    cellRenderer: "date",
-    cellEditor: "date",
-  },
-  {
-    headerName: "Selecy",
-    cellRenderer: "select",
-    cellEditor: "select",
+    headerName: "Select",
+    field: "select",
+    type: CellType.Select,
   },
   {
     headerName: "Make",
     field: "make",
     sortable: true,
-    filter: true,
-    cellEditor: "text",
+    type: CellType.Text,
   },
   {
     headerName: "Model",
     field: "model",
     sortable: true,
-    filter: FilterType.Text,
+    type: CellType.Text,
   },
   {
     headerName: "Price",
     field: "price",
     sortable: true,
-    filter: FilterType.Number,
+    type: CellType.Number,
   },
   {
     headerName: "Date",
     field: "date",
     sortable: true,
-    filter: FilterType.Date,
+    type: CellType.Date,
   },
 ];
 
@@ -62,22 +53,25 @@ const data = [
   {
     make: "Toyota",
     model: "Celica",
+    select: "test 1",
     price: 35000,
-    date: new Date(Date.now()),
+    date: "2022-01-05",
     actions: { canSave: false },
   },
   {
     make: "Ford",
     model: "Mondeo",
+    select: "test 1",
     price: 32000,
-    date: new Date(Date.now()),
+    date: "2022-01-05",
     actions: { canDelete: true },
   },
   {
     make: "Porshe",
     model: "Boxter",
+    select: "test 1",
     price: 72000,
-    date: new Date(Date.now()),
+    date: "2022-01-05",
     actions: { canEdit: false },
   },
 ];

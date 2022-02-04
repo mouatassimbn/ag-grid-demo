@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import { ColumnDefinition } from "../Table/Table.component";
+import { CellType, ColumnDefinition } from "../Table/Table.component";
 
 export interface ActionsColumnDefinition extends ColumnDefinition {
   colId: string;
-  cellRenderer: string;
+  type: CellType;
   editable: boolean;
   cellRendererParams: {
     onEdit: Function;
@@ -31,18 +31,12 @@ const WithActions = (Table: any) => {
     constructor(props: WithActionsProps) {
       super(props);
       this.state = {
-        columns: props.columns,
-      };
-    }
-
-    componentDidMount() {
-      this.setState((state) => ({
         columns: [
-          ...state.columns,
+          ...props.columns,
           {
             colId: "actions",
             editable: false,
-            cellRenderer: "actions",
+            type: CellType.Actions,
             cellRendererParams: {
               onEdit: this._editHandler,
               onSave: this._saveHandler,
@@ -51,7 +45,7 @@ const WithActions = (Table: any) => {
             },
           },
         ],
-      }));
+      };
     }
 
     private _editHandler = (params: any) => {
