@@ -4,6 +4,7 @@ import Table, {
   ColumnDefinition,
 } from "./components/Table/Table.component";
 import WithActions from "./components/WithActions/WithActions.component";
+// import WithValidationAdapter from "./components/WithValidationAdapter/WithValidationAdapter.component";
 
 const values = [
   { value: "test1", label: "Test 1" },
@@ -66,6 +67,7 @@ const data = [
     price: 35000,
     date: "2022-01-05",
     actions: { canSave: false },
+    lastValidation: false,
   },
   {
     active: false,
@@ -76,6 +78,7 @@ const data = [
     price: 32000,
     date: "2022-01-05",
     actions: { canDelete: true },
+    lastValidation: false,
   },
   {
     active: false,
@@ -86,6 +89,7 @@ const data = [
     price: 72000,
     date: "2022-01-05",
     actions: { canEdit: false },
+    lastValidation: false,
   },
 ];
 
@@ -94,10 +98,7 @@ const TableWithActions = WithActions(Table);
 function App() {
   return (
     <div className="App">
-      <TableWithActions
-        data={data}
-        columns={columnDefinitions}
-      />
+      <TableWithActions data={data} columns={columnDefinitions} />
     </div>
   );
 }

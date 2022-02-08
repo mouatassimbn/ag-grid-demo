@@ -34,6 +34,9 @@ const CheckboxInput = forwardRef((props: any, ref) => {
       isCancelAfterEnd() {
         return value;
       },
+      isValid() {
+        return true;
+      },
     };
   });
 

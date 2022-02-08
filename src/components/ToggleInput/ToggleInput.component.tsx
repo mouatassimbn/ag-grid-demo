@@ -34,6 +34,9 @@ const ToggleInput = forwardRef((props: any, ref) => {
     isCancelAfterEnd() {
       return value;
     },
+    isValid() {
+      return true;
+    },
   }));
 
   return (

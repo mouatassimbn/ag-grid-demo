@@ -11,6 +11,7 @@ import { TextField } from "@mui/material";
 const TextInput = forwardRef((props: any, ref) => {
   const [value, setValue] = useState(props.value);
   const [isEditing, setIsEditing] = useState(false);
+  const [isValid] = useState(false);
   const refInput: Ref<any> = useRef(null);
 
   useEffect(() => {
@@ -28,23 +29,27 @@ const TextInput = forwardRef((props: any, ref) => {
       getValue() {
         return value;
       },
-      isCancelBeforeStart() {
-        return false;
+      afterGuiAttached() {
+        setValue(props.value);
+        refInput.current.focus();
+        refInput.current.select();
       },
-
-      isCancelAfterEnd() {
-        // our editor will reject any value greater than 1000
-        return value > 1000;
-      },
+      isValid() {
+        return 
+      }
     };
   });
+
+  const handleInputChange = (event: any) => {
+    setValue(event.target.value);
+  };
 
   return (
     <TextField
       type="text"
       ref={refInput}
       value={value}
-      onChange={(event) => setValue(event.target.value)}
+      onChange={handleInputChange}
       disabled={!isEditing}
       variant="standard"
       size="small"

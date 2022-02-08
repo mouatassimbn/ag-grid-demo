@@ -70,8 +70,9 @@ const Table = (props: TableProps) => {
     params.api.refreshCells();
   }, []);
 
-  const onGridReady = () => {
+  const onGridReady = (params: any) => {
     // Step 1 convert
+    params.columnApi.autoSizeAllColumns();
     setColDefs(conversionAdapter(columnsDefinition));
   };
 
